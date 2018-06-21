@@ -8,6 +8,7 @@ CUR=$(cd `dirname 0`;pwd)
 . $CUR/include/spark.sh
 . $CUR/include/hbase.sh
 . $CUR/include/laradock.sh
+. $CUR/include/sqoop.sh
 HADOOP_VERSION=2.7.6
 JDK_VERSION=8u131
 HIVE_VERSION=2.1.1
@@ -15,6 +16,7 @@ SCALA_VERSION=2.11.12
 SPARK_VERSION=2.1.0
 HBASE_VERSION=1.2.6
 DOCKER_VERSION=18.03.0
+SQOOP_VERSION=1.4.7
 INSTALL_PATH=/usr/local
 STACK=undistributed
 
@@ -26,4 +28,5 @@ STACK=undistributed
 #install_scala $SCALA_VERSION $INSTALL_PATH
 #install_spark $SPARK_VERSION $INSTALL_PATH $STACK
 #install_hbase $HBASE_VERSION $INSTALL_PATH $STACK
-install_laradock $DOCKER_VERSION $INSTALL_PATH
+#install_laradock $DOCKER_VERSION $INSTALL_PATH
+install_sqoop $SQOOP_VERSION $INSTALL_PATH $INSTALL_PATH/hadoop-${HADOOP_VERSION} $INSTALL_PATH/hive-${HIVE_VERSION}
