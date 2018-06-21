@@ -92,7 +92,7 @@ install_hive()
 </property>
 <property>
     <name>hive.metastore.schema.verification</name>
-    <value>true</value>
+    <value>false</value>
 </property>
 <!--显示数据库名称-->
 <property>
