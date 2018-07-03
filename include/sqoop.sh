@@ -17,6 +17,8 @@ install_sqoop()
         tar -zxvf $CUR/src/sqoop-${sqoop_version}.bin__hadoop-2.6.0.tar.gz -C $install_path
         mv $install_path/sqoop-${sqoop_version}.bin__hadoop-2.6.0 $install_path/sqoop-${sqoop_version}
     fi
+    wget -O $CUR/src/java-json.jar.zip http://www.java2s.com/Code/JarDownload/java-json/java-json.jar.zip
+    unzip $CUR/src/java-json.jar.zip;mv $CUR/src/java-json.jar $install_path/sqoop-${sqoop_version}/lib
     chown $USER:$USER -R $install_path/sqoop-${sqoop_version}
     # 添加环境变量
     echo "# sqoop environment" >> /etc/profile
