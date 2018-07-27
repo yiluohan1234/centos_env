@@ -1,6 +1,6 @@
 #!/bin/bash
 #set -x
-install_laradock()
+install_docker()
 {
     local docker_version=$1
     local install_path=$2
@@ -50,13 +50,8 @@ install_laradock()
     cat > /etc/docker/daemon.json <<EOF
 {
   "registry-mirrors": [
-    "https://1234abcd.mirror.aliyuncs.com"
+    "https://registry.docker-cn.com"
   ]
 }
 EOF
-    cd $install_path;git clone https://github.com/yiluohan1234/laradock
-    cp $install_path/laradock/env-example $install_path/laradock/.env
-    echo "DB_HOST=mysql" >> $install_path/laradock/.env
-    echo "REDIS_HOST=redis" >> $install_path/laradock/.env
-    echo "QUEUE_HOST=beanstalkd" >> $install_path/laradock/.env
 } 
