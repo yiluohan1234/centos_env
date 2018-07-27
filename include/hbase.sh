@@ -1,7 +1,7 @@
 #!/bin/bash
 install_hbase()
 {
-	local hbase_version=$1
+    local hbase_version=$1
     local install_path=$2
     local stack=$3
 	# 判断源文件是否存在，不存在即下载http://www-us.apache.org/dist/hbase/1.2.6/

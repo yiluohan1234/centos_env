@@ -10,6 +10,7 @@ CUR=$(cd `dirname 0`;pwd)
 . $CUR/include/laradock.sh
 . $CUR/include/sqoop.sh
 . $CUR/include/docker.sh
+. $CUR/include/heroku_cli.sh
 HADOOP_VERSION=2.7.6
 JDK_VERSION=8u131
 HIVE_VERSION=2.1.1
@@ -25,16 +26,17 @@ usage()
 {
     case $1 in
         "")
-            echo "Usage: bcompare.sh command [options]"
-            echo "      main.sh install_jdk"
-            echo "      main.sh install_hadoop"
-            echo "      main.sh install_hive"
-            echo "      main.sh install_scala"
-            echo "      main.sh install_spark"
-            echo "      main.sh install_hbase"
-            echo "      main.sh install_laradock"
-            echo "      main.sh install_docker"
-            echo "      main.sh install_sqoop"
+            echo "Usage: main.sh command [options]"
+            echo "      main.sh jdk"
+            echo "      main.sh hadoop"
+            echo "      main.sh hive"
+            echo "      main.sh scala"
+            echo "      main.sh spark"
+            echo "      main.sh hbase"
+            echo "      main.sh laradock"
+            echo "      main.sh docker"
+            echo "      main.sh sqoop"
+            echo "      main.sh heroku_cli"
             echo ""
             ;;
     esac
@@ -45,32 +47,35 @@ args()
 {
       if [ $# -ne 0 ]; then
             case $1 in
-                  install_jdk)
+                  jdk)
                         install_jdk $JDK_VERSION $INSTALL_PATH $STACK
                         ;;
-                  install_hadoop)
+                  hadoop)
                         install_hadoop $HADOOP_VERSION $INSTALL_PATH $STACK
                         ;;
-                  install_hive)
+                  hive)
                         install_hive $HIVE_VERSION $INSTALL_PATH $STACK
                         ;;
-                  install_scala)
+                  scala)
                         install_scala $SCALA_VERSION $INSTALL_PATH
                         ;;
-                  install_spark)
+                  spark)
                         install_spark $SPARK_VERSION $INSTALL_PATH $STACK
                         ;;
-                  install_hbase)
+                  hbase)
                         install_hbase $HBASE_VERSION $INSTALL_PATH $STACK
                         ;;
-                  install_laradock)
+                  laradock)
                         install_laradock $DOCKER_VERSION $INSTALL_PATH
                         ;;
-                  install_docker)
+                  docker)
                         install_docker $DOCKER_VERSION $INSTALL_PATH
                         ;;
-                  install_sqoop)
+                  sqoop)
                         install_sqoop $SQOOP_VERSION $INSTALL_PATH $INSTALL_PATH/hadoop-${HADOOP_VERSION} $INSTALL_PATH/hive-${HIVE_VERSION}
+                        ;;
+		  heroku_cli)
+                        install_heroku_cli $INSTALL_PATH
                         ;;
 		  -h|--help)
 			usage
