@@ -10,3 +10,4 @@ centos hadoop hive spark hbase等软件的安装
 - hbase安装
 - laradock安装
 - sqoop安装
+- docker安装
