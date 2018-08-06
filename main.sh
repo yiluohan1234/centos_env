@@ -21,17 +21,6 @@ SQOOP_VERSION=1.4.7
 INSTALL_PATH=/usr/local
 STACK=undistributed
 
-
-
-#install_jdk $JDK_VERSION $INSTALL_PATH $STACK
-#install_hadoop $HADOOP_VERSION $INSTALL_PATH $STACK
-#install_hive $HIVE_VERSION $INSTALL_PATH $STACK
-#install_scala $SCALA_VERSION $INSTALL_PATH
-#install_spark $SPARK_VERSION $INSTALL_PATH $STACK
-#install_hbase $HBASE_VERSION $INSTALL_PATH $STACK
-#install_laradock $DOCKER_VERSION $INSTALL_PATH
-#install_docker $DOCKER_VERSION $INSTALL_PATH
-#install_sqoop $SQOOP_VERSION $INSTALL_PATH $INSTALL_PATH/hadoop-${HADOOP_VERSION} $INSTALL_PATH/hive-${HIVE_VERSION}
 usage()
 {
     case $1 in
