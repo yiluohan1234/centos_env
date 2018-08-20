@@ -26,24 +26,13 @@ SQOOP_VERSION=1.4.7
 INSTALL_PATH=/usr/local
 STACK=undistributed
 NETCAT_VERSION=0.7.1
+JDK_PATH=/usr/local/jdk1.8.0_131
 
 usage()
 {
     case $1 in
         "")
 <<<<<<< HEAD
-            echo "Usage: bcompare.sh command [options]"
-            echo "      main.sh install_jdk"
-            echo "      main.sh install_hadoop"
-            echo "      main.sh install_hive"
-            echo "      main.sh install_scala"
-            echo "      main.sh install_spark"
-            echo "      main.sh install_hbase"
-            echo "      main.sh install_netcat"
-            echo "      main.sh install_laradock"
-            echo "      main.sh install_docker"
-            echo "      main.sh install_sqoop"
-=======
             echo "Usage: main.sh command [options]"
             echo "      main.sh jdk"
             echo "      main.sh hadoop"
@@ -51,11 +40,10 @@ usage()
             echo "      main.sh scala"
             echo "      main.sh spark"
             echo "      main.sh hbase"
+            echo "      main.sh netcat"
+            echo "      main.sh flume"
             echo "      main.sh laradock"
             echo "      main.sh docker"
-            echo "      main.sh sqoop"
-            echo "      main.sh heroku_cli"
->>>>>>> abec4a64fc591119e3d901f63f7fa116deda0cef
             echo ""
             ;;
     esac
@@ -84,15 +72,10 @@ args()
                   hbase)
                         install_hbase $HBASE_VERSION $INSTALL_PATH $STACK
                         ;;
-<<<<<<< HEAD
-                  install_netcat)
+                  netcat)
                         install_netcat $NETCAT_VERSION $INSTALL_PATH $STACK
                         ;;
-
-                  install_laradock)
-=======
                   laradock)
->>>>>>> abec4a64fc591119e3d901f63f7fa116deda0cef
                         install_laradock $DOCKER_VERSION $INSTALL_PATH
                         ;;
                   docker)
@@ -101,6 +84,10 @@ args()
                   sqoop)
                         install_sqoop $SQOOP_VERSION $INSTALL_PATH $INSTALL_PATH/hadoop-${HADOOP_VERSION} $INSTALL_PATH/hive-${HIVE_VERSION}
                         ;;
+                  flume)
+                        install_flume $FLUME_VERSION $INSTALL_PATH $JDK_PATH
+                        ;;
+
 		  heroku_cli)
                         install_heroku_cli $INSTALL_PATH
                         ;;
