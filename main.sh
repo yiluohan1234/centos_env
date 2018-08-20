@@ -10,11 +10,10 @@ CUR=$(cd `dirname 0`;pwd)
 . $CUR/include/laradock.sh
 . $CUR/include/sqoop.sh
 . $CUR/include/docker.sh
-<<<<<<< HEAD
+. $CUR/include/flume.sh
 . $CUR/include/netcat.sh
-=======
 . $CUR/include/heroku_cli.sh
->>>>>>> abec4a64fc591119e3d901f63f7fa116deda0cef
+
 HADOOP_VERSION=2.7.6
 JDK_VERSION=8u131
 HIVE_VERSION=2.1.1
@@ -26,13 +25,13 @@ SQOOP_VERSION=1.4.7
 INSTALL_PATH=/usr/local
 STACK=undistributed
 NETCAT_VERSION=0.7.1
+FLUME_VERSION=1.8.0
 JDK_PATH=/usr/local/jdk1.8.0_131
 
 usage()
 {
     case $1 in
         "")
-<<<<<<< HEAD
             echo "Usage: main.sh command [options]"
             echo "      main.sh jdk"
             echo "      main.sh hadoop"
