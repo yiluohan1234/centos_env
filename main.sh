@@ -10,7 +10,11 @@ CUR=$(cd `dirname 0`;pwd)
 . $CUR/include/laradock.sh
 . $CUR/include/sqoop.sh
 . $CUR/include/docker.sh
+<<<<<<< HEAD
+. $CUR/include/netcat.sh
+=======
 . $CUR/include/heroku_cli.sh
+>>>>>>> abec4a64fc591119e3d901f63f7fa116deda0cef
 HADOOP_VERSION=2.7.6
 JDK_VERSION=8u131
 HIVE_VERSION=2.1.1
@@ -21,11 +25,25 @@ DOCKER_VERSION=18.03.0
 SQOOP_VERSION=1.4.7
 INSTALL_PATH=/usr/local
 STACK=undistributed
+NETCAT_VERSION=0.7.1
 
 usage()
 {
     case $1 in
         "")
+<<<<<<< HEAD
+            echo "Usage: bcompare.sh command [options]"
+            echo "      main.sh install_jdk"
+            echo "      main.sh install_hadoop"
+            echo "      main.sh install_hive"
+            echo "      main.sh install_scala"
+            echo "      main.sh install_spark"
+            echo "      main.sh install_hbase"
+            echo "      main.sh install_netcat"
+            echo "      main.sh install_laradock"
+            echo "      main.sh install_docker"
+            echo "      main.sh install_sqoop"
+=======
             echo "Usage: main.sh command [options]"
             echo "      main.sh jdk"
             echo "      main.sh hadoop"
@@ -37,6 +55,7 @@ usage()
             echo "      main.sh docker"
             echo "      main.sh sqoop"
             echo "      main.sh heroku_cli"
+>>>>>>> abec4a64fc591119e3d901f63f7fa116deda0cef
             echo ""
             ;;
     esac
@@ -65,7 +84,15 @@ args()
                   hbase)
                         install_hbase $HBASE_VERSION $INSTALL_PATH $STACK
                         ;;
+<<<<<<< HEAD
+                  install_netcat)
+                        install_netcat $NETCAT_VERSION $INSTALL_PATH $STACK
+                        ;;
+
+                  install_laradock)
+=======
                   laradock)
+>>>>>>> abec4a64fc591119e3d901f63f7fa116deda0cef
                         install_laradock $DOCKER_VERSION $INSTALL_PATH
                         ;;
                   docker)
