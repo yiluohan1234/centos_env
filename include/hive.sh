@@ -102,10 +102,10 @@ install_hive()
 </configuration>
 EOF
     log_info "配置mysql driver"
-    wget -O $CUR/src/mysql-connector-java-5.1.41.tar.gz http://mirrors.sohu.com/mysql/Connector-J/mysql-connector-java-5.1.41.tar.gz
-    tar -zxvf $CUR/src/mysql-connector-java-5.1.41.tar.gz -C $CUR/src
-    cp $CUR/src/mysql-connector-java-5.1.41/mysql-connector-java-5.1.41-bin.jar ${install_path}/hive-${hive_version}/lib
-    rm -rf $CUR/src/mysql-connector-java-5.1.41
+    wget -O $CUR/src/mysql-connector-java-5.1.49.tar.gz http://mirrors.sohu.com/mysql/Connector-J/mysql-connector-java-5.1.49.tar.gz
+    tar -zxvf $CUR/src/mysql-connector-java-5.1.49.tar.gz -C $CUR/src
+    cp $CUR/src/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49.jar ${install_path}/hive-${hive_version}/lib
+    rm -rf $CUR/src/mysql-connector-java-5.1.49
     # 先执行schematool命令进行初始化
     log_info "schematool初始化"
     ${install_path}/hive-${hive_version}/bin/schematool -dbType mysql -initSchema

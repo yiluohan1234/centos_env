@@ -14,11 +14,11 @@ CUR=$(cd `dirname 0`;pwd)
 . $CUR/include/netcat.sh
 . $CUR/include/heroku_cli.sh
 
-HADOOP_VERSION=2.7.6
+HADOOP_VERSION=2.7.7
 JDK_VERSION=8u131
-HIVE_VERSION=2.1.1
+HIVE_VERSION=2.3.7
 SCALA_VERSION=2.11.12
-SPARK_VERSION=2.4.5
+SPARK_VERSION=2.4.6
 HBASE_VERSION=1.2.6
 DOCKER_VERSION=18.03.0
 SQOOP_VERSION=1.4.7
@@ -43,6 +43,7 @@ usage()
             echo "      main.sh flume"
             echo "      main.sh laradock"
             echo "      main.sh docker"
+            echo "      main.sh sqoop"
             echo ""
             ;;
     esac
@@ -104,3 +105,4 @@ args()
       fi
 }
 args $@
+#cp ${INSTALL_PATH}/hive-${HIVE_VERSION}/conf/hive-site.xml ${INSTALL_PATH}/hive-${SPARK_VERSION}/conf
