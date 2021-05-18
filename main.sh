@@ -13,6 +13,7 @@ CUR=$(cd `dirname 0`;pwd)
 . $CUR/include/flume.sh
 . $CUR/include/netcat.sh
 . $CUR/include/heroku_cli.sh
+. $CUR/include/flink.sh
 
 HADOOP_VERSION=2.7.7
 JDK_VERSION=8u131
@@ -27,6 +28,7 @@ STACK=undistributed
 NETCAT_VERSION=0.7.1
 FLUME_VERSION=1.8.0
 JDK_PATH=/usr/local/jdk1.8.0_131
+FLINK_VERSION=1.12.3
 
 usage()
 {
@@ -44,6 +46,7 @@ usage()
             echo "      main.sh laradock"
             echo "      main.sh docker"
             echo "      main.sh sqoop"
+            echo "      main.sh flink"
             echo ""
             ;;
     esac
@@ -90,6 +93,9 @@ args()
 
 		  heroku_cli)
                         install_heroku_cli $INSTALL_PATH
+                        ;;
+                  flink)
+                        install_flink $FLINK_VERSION $INSTALL_PATH ${SCALA_VERSION:0:4} $STACK
                         ;;
 		  -h|--help)
 			usage
