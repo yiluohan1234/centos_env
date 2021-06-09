@@ -43,7 +43,6 @@ usage()
             echo "      main.sh hbase"
             echo "      main.sh netcat"
             echo "      main.sh flume"
-            echo "      main.sh laradock"
             echo "      main.sh docker"
             echo "      main.sh sqoop"
             echo "      main.sh flink"
@@ -78,11 +77,8 @@ args()
                   netcat)
                         install_netcat $NETCAT_VERSION $INSTALL_PATH $STACK
                         ;;
-                  laradock)
-                        install_laradock $DOCKER_VERSION $INSTALL_PATH
-                        ;;
                   docker)
-                        install_docker $DOCKER_VERSION $INSTALL_PATH
+                        install_docker $DOCKER_VERSION
                         ;;
                   sqoop)
                         install_sqoop $SQOOP_VERSION $INSTALL_PATH $INSTALL_PATH/hadoop-${HADOOP_VERSION} $INSTALL_PATH/hive-${HIVE_VERSION}
