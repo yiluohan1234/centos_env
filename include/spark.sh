@@ -4,7 +4,10 @@ install_scala()
 {
     local scala_version=$1
     local install_path=$2
-	# 判断源文件是否存在，不存在即下载https://downloads.lightbend.com/scala/2.11.12/scala-2.11.12.tgz
+    if [ -d ${install_path}/scala-${scala_version} ]; then
+         rm -rf ${install_path}/scala-${scala_version}
+    fi
+    # 判断源文件是否存在，不存在即下载https://downloads.lightbend.com/scala/2.11.12/scala-2.11.12.tgz
     if [ ! -f $CUR/src/scala-${scala_version}.tgz ]; then
     	log_info "下载scala-${scala_version}"
         wget -O $CUR/src/scala-${scala_version}.tgz https://downloads.lightbend.com/scala/${scala_version}/scala-${scala_version}.tgz
@@ -27,6 +30,9 @@ install_spark()
     local spark_version=$1
     local install_path=$2
     local stack=$3
+    if [ -d ${install_path}/spark-${spark_version} ]; then
+         rm -rf ${install_path}/spark-${spark_version}
+    fi
     # 判断源文件是否存在，不存在即下载https://archive.apache.org/dist/spark/spark-2.1.0/spark-2.1.0-bin-hadoop2.7.tgz
     if [ ! -f $CUR/src/spark-${spark_version}-bin-hadoop2.7.tgz ]; then
         log_info "下载spark-${spark_version}"

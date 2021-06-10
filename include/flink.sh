@@ -6,6 +6,9 @@ install_flink()
     local install_path=$2
     local scala_version=$3
     local stack=$4
+    if [ -d ${install_path}/flink-${flink_version} ]; then
+         rm -rf ${install_path}/flink-${flink_version}
+    fi
     # 判断源文件是否存在，不存在wget http://mirror.bit.edu.cn/apache/flink/flink-1.9.2/flink-1.9.2-bin-scala_2.11.tgz
     if [ ! -f $CUR/src/flink-${flink_version}-bin-scala_${scala_version}.tgz ]; then
         log_info "下载flink-${flink_version}"

@@ -2,16 +2,16 @@
 # 安装mysql并为hive配置环境
 install_mysql()
 {
-rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
-yum install -y mysql mysql-server mysql-libs
-service mysqld start
-systemctl start mysqld.service
-mysqladmin -u root password 199037
-HOSTNAME="localhost"
-PORT="3306"
-USERNAME="root"
-PASSWORD="199037"
-mysql -h${HOSTNAME}  -P${PORT}  -u${USERNAME} -p${PASSWORD} -e "create user 'hive'@'%' IDENTIFIED BY 'hive';GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%' WITH GRANT OPTION;grant all on *.* to 'hive'@'localhost' identified by 'hive';flush privileges;"
+    rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+    yum install -y mysql mysql-server mysql-libs
+    service mysqld start
+    systemctl start mysqld.service
+    mysqladmin -u root password 199037
+    HOSTNAME="localhost"
+    PORT="3306"
+    USERNAME="root"
+    PASSWORD="199037"
+    mysql -h${HOSTNAME}  -P${PORT}  -u${USERNAME} -p${PASSWORD} -e "create user 'hive'@'%' IDENTIFIED BY 'hive';GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%' WITH GRANT OPTION;grant all on *.* to 'hive'@'localhost' identified by 'hive';flush privileges;"
 }
 
 install_hive()
@@ -19,6 +19,12 @@ install_hive()
     local hive_version=$1
     local install_path=$2
     local stack=$3
+    if [ -d ${install_path}/hive-${hive_version} ]; then
+         rm -rf ${install_path}/hive-${hive_version}
+    fi
+    if [ ! -f `which mysql` ];then
+        install_mysql
+    fi
 
     # 判断源文件是否存在，不存在即下载http://mirror.bit.edu.cn/apache/hive/hive-2.1.1/apache-hive-2.1.1-bin.tar.gz
     if [ ! -f $CUR/src/apache-hive-${hive_version}-bin.tar.gz ]; then
@@ -36,7 +42,6 @@ install_hive()
     fi
     if [ ${stack} = "undistributed" ];then
         log_info "安装mysql并进行配置"
-        install_mysql
         log_info "添加环境变量"
         echo "# hive environment" >> /etc/profile
         echo "export HIVE_HOME=${install_path}/hive-${hive_version}" >> /etc/profile
