@@ -7,7 +7,6 @@ CUR=$(cd `dirname 0`;pwd)
 . $CUR/include/hive.sh
 . $CUR/include/spark.sh
 . $CUR/include/hbase.sh
-. $CUR/include/laradock.sh
 . $CUR/include/sqoop.sh
 . $CUR/include/docker.sh
 . $CUR/include/flume.sh
