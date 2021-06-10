@@ -71,7 +71,7 @@ EOF
 </configuration>
 EOF
         # 配置hadoop-env.sh
-        jdk_path="${install_path}/`ls -l ${install_path}|grep jdk|awk '{print $NF}'`"
+        jdk_path="/usr/lib/jvm/`ls -l /usr/lib/jvm|grep '^d'|awk '{print $NF}'`"
         sed -i "s#^export JAVA_HOME=.*#export JAVA_HOME=${jdk_path}#g" ${install_path}/hadoop-${hadoop_version}/etc/hadoop/hadoop-env.sh
         # 添加环境变量
         echo "# hadoop environment" >> /etc/profile

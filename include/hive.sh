@@ -22,9 +22,8 @@ install_hive()
     if [ -d ${install_path}/hive-${hive_version} ]; then
          rm -rf ${install_path}/hive-${hive_version}
     fi
-    if [ ! -f `which mysql` ];then
-        install_mysql
-    fi
+    # install mysql
+    install_mysql
 
     # 判断源文件是否存在，不存在即下载http://mirror.bit.edu.cn/apache/hive/hive-2.1.1/apache-hive-2.1.1-bin.tar.gz
     if [ ! -f $CUR/src/apache-hive-${hive_version}-bin.tar.gz ]; then
@@ -107,7 +106,9 @@ install_hive()
 </configuration>
 EOF
     log_info "配置mysql driver"
-    wget -O $CUR/src/mysql-connector-java-5.1.49.tar.gz http://mirrors.sohu.com/mysql/Connector-J/mysql-connector-java-5.1.49.tar.gz
+    if [ ! -f $CUR/src/mysql-connector-java-5.1.49.tar.gz ]; then
+        wget -O $CUR/src/mysql-connector-java-5.1.49.tar.gz http://mirrors.sohu.com/mysql/Connector-J/mysql-connector-java-5.1.49.tar.gz
+    fi
     tar -zxvf $CUR/src/mysql-connector-java-5.1.49.tar.gz -C $CUR/src
     cp $CUR/src/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49.jar ${install_path}/hive-${hive_version}/lib
     rm -rf $CUR/src/mysql-connector-java-5.1.49
