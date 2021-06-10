@@ -15,7 +15,7 @@ CUR=$(cd `dirname 0`;pwd)
 . $CUR/include/flink.sh
 
 HADOOP_VERSION=2.7.7
-JDK_VERSION=8u131
+JDK_VERSION=1.8.0
 HIVE_VERSION=2.3.7
 SCALA_VERSION=2.11.12
 SPARK_VERSION=2.4.6
@@ -23,11 +23,10 @@ HBASE_VERSION=1.2.6
 DOCKER_VERSION=18.03.0
 SQOOP_VERSION=1.4.7
 INSTALL_PATH=/usr/local
-STACK=undistributed
 NETCAT_VERSION=0.7.1
 FLUME_VERSION=1.8.0
-JDK_PATH=/usr/local/jdk1.8.0_131
 FLINK_VERSION=1.12.3
+STACK=undistributed
 
 usage()
 {
@@ -56,7 +55,7 @@ args()
       if [ $# -ne 0 ]; then
             case $1 in
                   jdk)
-                        install_jdk $JDK_VERSION $INSTALL_PATH $STACK
+                        install_jdk $JDK_VERSION $STACK
                         ;;
                   hadoop)
                         install_hadoop $HADOOP_VERSION $INSTALL_PATH $STACK
@@ -106,4 +105,3 @@ args()
       fi
 }
 args $@
-#cp ${INSTALL_PATH}/hive-${HIVE_VERSION}/conf/hive-site.xml ${INSTALL_PATH}/hive-${SPARK_VERSION}/conf

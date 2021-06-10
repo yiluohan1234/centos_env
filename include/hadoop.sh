@@ -1,19 +1,22 @@
 #!/bin/bash
 generate_ssh()
 {
-id_res_pub=~/.ssh/id_rsa.pub  
-if [ ! -f "$id_res_pub" ];then  
-    ssh-keygen -t rsa  
-else  
-    echo "id_rsa.pub is exist!"  
-fi  
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+    id_res_pub=~/.ssh/id_rsa.pub  
+    if [ ! -f "$id_res_pub" ];then  
+        ssh-keygen -t rsa  
+    else  
+        echo "id_rsa.pub is exist!"  
+    fi  
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 }
 install_hadoop()
 {
     local hadoop_version=$1
     local install_path=$2
     local stack=$3
+    if [ -d ${install_path}/hadoop-${hadoop_version} ]; then
+         rm -rf ${install_path}/hadoop-${hadoop_version}
+    fi
     generate_ssh
     # 判断源文件是否存在，不存在即下载
     if [ ! -f $CUR/src/hadoop-${hadoop_version}.tar.gz ]; then
