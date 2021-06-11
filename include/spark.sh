@@ -12,10 +12,10 @@ install_scala()
     	log_info "下载scala-${scala_version}"
         wget -O $CUR/src/scala-${scala_version}.tgz https://downloads.lightbend.com/scala/${scala_version}/scala-${scala_version}.tgz
         log_info "解压缩scalap-${scala_version}"
-        tar -zxvf $CUR/src/scala-${scala_version}.tgz -C $install_path
+        tar -zxf $CUR/src/scala-${scala_version}.tgz -C $install_path
     else
         log_info "解压缩scala-${scala_version}"
-        tar -zxvf $CUR/src/scala-${scala_version}.tgz -C $install_path
+        tar -zxf $CUR/src/scala-${scala_version}.tgz -C $install_path
     fi
     chown $USER:$USER -R $install_path/scala-${scala_version}
     # 添加环境变量
@@ -38,18 +38,19 @@ install_spark()
         log_info "下载spark-${spark_version}"
         wget -O $CUR/src/spark-${spark_version}-bin-hadoop2.7.tgz https://archive.apache.org/dist/spark/spark-${spark_version}/spark-${spark_version}-bin-hadoop2.7.tgz
         log_info "解压缩spark-${spark_version}"
-        tar -zxvf $CUR/src/spark-${spark_version}-bin-hadoop2.7.tgz -C $install_path
+        tar -zxf $CUR/src/spark-${spark_version}-bin-hadoop2.7.tgz -C $install_path
         mv $install_path/spark-${spark_version}-bin-hadoop2.7 $install_path/spark-${spark_version}
     else
         log_info "解压缩spark-${spark_version}"
-        tar -zxvf $CUR/src/spark-${spark_version}-bin-hadoop2.7.tgz -C $install_path
+        tar -zxf $CUR/src/spark-${spark_version}-bin-hadoop2.7.tgz -C $install_path
         mv $install_path/spark-${spark_version}-bin-hadoop2.7 $install_path/spark-${spark_version}
     fi
     chown $USER:$USER -R $install_path/spark-${spark_version}
+    jdk_path="/usr/lib/jvm/`ls -l /usr/lib/jvm|grep '^d'|awk '{print $NF}'`"
     cat > ${install_path}/spark-${SPARK_VERSION}/conf/spark-env.sh<<EOF
 export SPARK_HOME=${install_path}/spark-${SPARK_VERSION}
 export SCALA_HOME=${install_path}/scala-${SCALA_VERSION}
-export JAVA_HOME=${JDK_PATH}
+export JAVA_HOME=${jdk_path}
 export HADOOP_HOME=${install_path}/hadoop-${HADOOP_VERSION}
 export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$SCALA_HOME/bin
 export SPARK_LIBRARY_PATH=${SPARK_HOME}/lib
@@ -65,8 +66,10 @@ export HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
 export SPARK_MASTER_IP=localhost
 EOF
     log_info "配置mysql driver"
-    wget -O $CUR/src/mysql-connector-java-5.1.49.tar.gz http://mirrors.sohu.com/mysql/Connector-J/mysql-connector-java-5.1.49.tar.gz
-    tar -zxvf $CUR/src/mysql-connector-java-5.1.49.tar.gz -C $CUR/src
+    if [ ! -f $CUR/src/mysql-connector-java-5.1.49.tar.gz ]; then
+        wget -O $CUR/src/mysql-connector-java-5.1.49.tar.gz http://mirrors.sohu.com/mysql/Connector-J/mysql-connector-java-5.1.49.tar.gz
+    fi
+    tar -zxf $CUR/src/mysql-connector-java-5.1.49.tar.gz -C $CUR/src
     cp $CUR/src/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49.jar ${install_path}/spark-${spark_version}/jars
     rm -rf $CUR/src/mysql-connector-java-5.1.49
     if [ ${stack} = "undistributed" ];then

@@ -22,14 +22,10 @@ install_hadoop()
     if [ ! -f $CUR/src/hadoop-${hadoop_version}.tar.gz ]; then
         log_info "download hadoop-${hadoop_version}"
         wget -O $CUR/src/hadoop-${hadoop_version}.tar.gz http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-${hadoop_version}/hadoop-${hadoop_version}.tar.gz
-        log_info "解压缩hadoop-${hadoop_version}"
-        tar -zxvf $CUR/src/hadoop-${hadoop_version}.tar.gz -C $install_path
-	chown $USER:$USER -R ${install_path}/hadoop-${hadoop_version}
-    else
-        log_info "解压缩hadoop-${hadoop_version}"
-        tar -zxvf $CUR/src/hadoop-${hadoop_version}.tar.gz -C $install_path
-        chown $USER:$USER -R ${install_path}/hadoop-${hadoop_version}
     fi
+    log_info "解压缩hadoop-${hadoop_version}"
+    tar -zxf $CUR/src/hadoop-${hadoop_version}.tar.gz -C $install_path
+    chown $USER:$USER -R ${install_path}/hadoop-${hadoop_version}
     if [ ${stack} = "undistributed" ];then
         # 配置core-site.xml
         cat > ${install_path}/hadoop-${hadoop_version}/etc/hadoop/core-site.xml<<EOF

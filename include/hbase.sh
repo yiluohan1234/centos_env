@@ -11,12 +11,9 @@ install_hbase()
     if [ ! -f $CUR/src/hbase-${hbase_version}-bin.tar.gz ]; then
     	log_info "下载hbase-${hbase_version}"
         wget -O $CUR/src/hbase-${hbase_version}-bin.tar.gz http://www-us.apache.org/dist/hbase/${hbase_version}/hbase-${hbase_version}-bin.tar.gz
-        log_info "解压缩hbase-${hbase_version}"
-        tar -zxvf $CUR/src/hbase-${hbase_version}-bin.tar.gz -C $install_path
-    else
-        log_info "解压缩hbase-${hbase_version}"
-        tar -zxvf $CUR/src/hbase-${hbase_version}-bin.tar.gz -C $install_path
     fi
+    log_info "解压缩hbase-${hbase_version}"
+    tar -zxf $CUR/src/hbase-${hbase_version}-bin.tar.gz -C $install_path
     chown $USER:$USER -R $install_path/hbase-${hbase_version}
     # 添加环境变量
     echo "# hbase environment" >> /etc/profile

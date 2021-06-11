@@ -2,7 +2,7 @@
 # 安装mysql并为hive配置环境
 install_mysql()
 {
-    rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+    #rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
     yum install -y mysql mysql-server mysql-libs
     service mysqld start
     systemctl start mysqld.service
@@ -11,7 +11,7 @@ install_mysql()
     PORT="3306"
     USERNAME="root"
     PASSWORD="199037"
-    mysql -h${HOSTNAME}  -P${PORT}  -u${USERNAME} -p${PASSWORD} -e "create user 'hive'@'%' IDENTIFIED BY 'hive';GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%' WITH GRANT OPTION;grant all on *.* to 'hive'@'localhost' identified by 'hive';flush privileges;"
+    #mysql -h${HOSTNAME}  -P${PORT}  -u${USERNAME} -p${PASSWORD} -e "create user 'hive'@'%' IDENTIFIED BY 'hive';GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%' WITH GRANT OPTION;grant all on *.* to 'hive'@'localhost' identified by 'hive';flush privileges;"
 }
 
 install_hive()
@@ -29,16 +29,12 @@ install_hive()
     if [ ! -f $CUR/src/apache-hive-${hive_version}-bin.tar.gz ]; then
         log_info "download hive-${hive_version}"
         wget -O $CUR/src/apache-hive-${hive_version}-bin.tar.gz http://mirror.bit.edu.cn/apache/hive/hive-${hive_version}/apache-hive-${hive_version}-bin.tar.gz
-        log_info "解压缩hive-${hive_version}"
-        tar -zxvf $CUR/src/apache-hive-${hive_version}-bin.tar.gz -C $install_path
-        mv ${install_path}/apache-hive-${hive_version}-bin ${install_path}/hive-${hive_version}
-	chown $USER:$USER -R ${install_path}/hive-${hive_version}
-    else
-        log_info "解压缩hive-${hive_version}"
-        tar -zxvf $CUR/src/apache-hive-${hive_version}-bin.tar.gz -C $install_path
-        mv ${install_path}/apache-hive-${hive_version}-bin ${install_path}/hive-${hive_version}
-        chown $USER:$USER -R ${install_path}/hive-${hive_version}
     fi
+    log_info "解压缩hive-${hive_version}"
+    tar -zxf $CUR/src/apache-hive-${hive_version}-bin.tar.gz -C $install_path
+    mv ${install_path}/apache-hive-${hive_version}-bin ${install_path}/hive-${hive_version}
+    chown $USER:$USER -R ${install_path}/hive-${hive_version}
+
     if [ ${stack} = "undistributed" ];then
         log_info "安装mysql并进行配置"
         log_info "添加环境变量"
@@ -109,7 +105,7 @@ EOF
     if [ ! -f $CUR/src/mysql-connector-java-5.1.49.tar.gz ]; then
         wget -O $CUR/src/mysql-connector-java-5.1.49.tar.gz http://mirrors.sohu.com/mysql/Connector-J/mysql-connector-java-5.1.49.tar.gz
     fi
-    tar -zxvf $CUR/src/mysql-connector-java-5.1.49.tar.gz -C $CUR/src
+    tar -zxf $CUR/src/mysql-connector-java-5.1.49.tar.gz -C $CUR/src
     cp $CUR/src/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49.jar ${install_path}/hive-${hive_version}/lib
     rm -rf $CUR/src/mysql-connector-java-5.1.49
     # 先执行schematool命令进行初始化

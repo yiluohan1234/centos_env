@@ -9,14 +9,11 @@ install_sqoop()
     if [ ! -f $CUR/src/sqoop-${sqoop_version}.bin__hadoop-2.6.0.tar.gz ]; then
     	log_info "下载sqoop-${sqoop_version}"
         wget -O $CUR/src/sqoop-${sqoop_version}.bin__hadoop-2.6.0.tar.gz https://mirrors.tuna.tsinghua.edu.cn/apache/sqoop/${sqoop_version}/sqoop-${sqoop_version}.bin__hadoop-2.6.0.tar.gz
-        log_info "解压缩sqoop-${sqoop_version}"
-        tar -zxvf $CUR/src/sqoop-${sqoop_version}.bin__hadoop-2.6.0.tar.gz -C $install_path
-        mv $install_path/sqoop-${sqoop_version}.bin__hadoop-2.6.0 $install_path/sqoop-${sqoop_version}
-    else
-        log_info "解压缩sqoop-${sqoop_version}"
-        tar -zxvf $CUR/src/sqoop-${sqoop_version}.bin__hadoop-2.6.0.tar.gz -C $install_path
-        mv $install_path/sqoop-${sqoop_version}.bin__hadoop-2.6.0 $install_path/sqoop-${sqoop_version}
     fi
+    log_info "解压缩sqoop-${sqoop_version}"
+    tar -zxvf $CUR/src/sqoop-${sqoop_version}.bin__hadoop-2.6.0.tar.gz -C $install_path
+    mv $install_path/sqoop-${sqoop_version}.bin__hadoop-2.6.0 $install_path/sqoop-${sqoop_version}
+
     wget -O $CUR/src/java-json.jar.zip http://www.java2s.com/Code/JarDownload/java-json/java-json.jar.zip
     unzip $CUR/src/java-json.jar.zip;mv $CUR/src/java-json.jar $install_path/sqoop-${sqoop_version}/lib
     chown $USER:$USER -R $install_path/sqoop-${sqoop_version}
